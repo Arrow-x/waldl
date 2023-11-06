@@ -22,6 +22,8 @@ walldir="$HOME/.local/share/wallhaven"
 cachedir="$HOME/.cache/wallhaven"
 # sxiv options
 sxiv_otps=" -tfpo -z 200" # o is needed for selection
+# sxiv options when selecting a wallpaper after download
+sxiv_otps_w="-io" # o is needed for selection
 # number of pages to show in search results
 # each page contains 24 results
 max_pages=4
@@ -33,6 +35,8 @@ quality=large
 atleast=1920x1080
 # add your apikey
 apikey=""
+# wallpaper_command: specify the command that can set your wallpaper
+wallpaper_command=""
 
 # the menu command used when no query is provided
 sh_menu () {
@@ -44,6 +48,11 @@ sh_menu () {
 # allow the user to customize the defaults
 [ -e "$HOME/.config/waldlrc" ] && . "$HOME/.config/waldlrc"
 
+set_wall(){
+	read -r url
+	"$wallpaper_command" "$url"
+
+}
 
 ##########################
 ## getting search query ##
@@ -165,4 +174,4 @@ do
 done | curl -K -
 
 sh_info "wallpapers downloaded in:- '$walldir'"
-$VIEWER $(ls -c)
+\ls -c | $VIEWER "$sxiv_otps_w" | set_wall
