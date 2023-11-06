@@ -49,6 +49,9 @@ sh_menu() {
 
 set_wall() {
 	read -r url
+	if [ -z "$url" ]; then
+		exit
+	fi
 	"$wallpaper_command" "$url"
 }
 
