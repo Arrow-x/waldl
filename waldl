@@ -37,21 +37,19 @@ atleast=1920x1080
 apikey=""
 # wallpaper_command: specify the command that can set your wallpaper
 wallpaper_command=""
-
 # the menu command used when no query is provided
-sh_menu () {
-	: | dmenu -p "search wallhaven:"
-	# ROFI: comment the previous line and uncomment the next line for rofi
-	# rofi -dmenu -l 0 -p "search wallpapers"
-}
+menu_command="rofi -dmenu -l 0 -p 'search wallpapers'"
 
 # allow the user to customize the defaults
 [ -e "$HOME/.config/waldlrc" ] && . "$HOME/.config/waldlrc"
 
+sh_menu () {
+	eval "$menu_command"
+}
+
 set_wall(){
 	read -r url
 	"$wallpaper_command" "$url"
-
 }
 
 ##########################
