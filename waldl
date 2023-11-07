@@ -49,9 +49,7 @@ sh_menu() {
 
 set_wall() {
 	read -r url
-	if [ -z "$url" ]; then
-		exit
-	fi
+	[ -z "$url" ] && exit
 	"$wallpaper_command" "$url"
 }
 
@@ -103,9 +101,7 @@ trap "clean_up" EXIT
 ##################
 
 full_link="https://wallhaven.cc/api/v1/search"
-if [ "$apikey" != "" ]; then
-	full_link="$full_link""?apikey=""$apikey"
-fi
+[ -n "$apikey" ] && full_link="$full_link""?apikey=""$apikey"
 # request the search results for each page
 get_results() {
 	for page_no in $(seq $max_pages); do
