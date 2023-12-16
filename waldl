@@ -33,6 +33,8 @@ sorting=relevance
 quality=large
 # atleast : least res
 atleast=1920x1080
+# ratios; comma seperated aspect ratios
+ratios=16x9,16x10
 # add your apikey
 apikey=""
 # wallpaper_command: specify the command that can set your wallpaper
@@ -111,7 +113,8 @@ get_results() {
 					-d "q=$1" \
 					-d "page=$page_no" \
 					-d "atleast=$atleast" \
-					-d "sorting=$sorting"
+					-d "sorting=$sorting" \
+					-d "ratios=$ratios"
 			)
 			printf "%s\n" "$json" >>"$datafile"
 		} &
