@@ -39,6 +39,14 @@ ratios=16x9,16x10
 categories=111
 # sfw/sketchy/nsfw
 purity=111
+# #660000 #990000 #cc0000 #cc3333 #ea4c88
+# #993399 #663399 #333399 #0066cc #0099cc #66cccc
+# #77cc33 #669900 #336600 #666600 #999900
+# #cccc33 #ffff00 #ffcc33 #ff9900 #ff6600
+# #cc6633 #996633 #663300
+# #cccccc #ffffff #424153 #000000 #999999
+# without the #
+colors=""
 # add your apikey
 apikey=""
 # wallpaper_command: specify the command that can set your wallpaper
@@ -120,7 +128,8 @@ get_results() {
 					-d "sorting=$sorting" \
 					-d "ratios=$ratios" \
 					-d "categories=$categories" \
-					-d "purity=$purity"
+					-d "purity=$purity" \
+					-d "colors=$colors"
 			)
 			printf "%s\n" "$json" >>"$datafile"
 		} &
