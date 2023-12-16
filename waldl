@@ -37,6 +37,8 @@ atleast=1920x1080
 ratios=16x9,16x10
 # general/anime/people
 categories=111
+# sfw/sketchy/nsfw
+purity=111
 # add your apikey
 apikey=""
 # wallpaper_command: specify the command that can set your wallpaper
@@ -117,7 +119,8 @@ get_results() {
 					-d "atleast=$atleast" \
 					-d "sorting=$sorting" \
 					-d "ratios=$ratios" \
-					-d "categories=$categories"
+					-d "categories=$categories" \
+					-d "purity=$purity"
 			)
 			printf "%s\n" "$json" >>"$datafile"
 		} &
