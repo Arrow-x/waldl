@@ -1,8 +1,8 @@
 #!/bin/sh
 
-# https://github.com/pystardust/waldl
+# https://github.com/arrowx/waldl
 # script to find and download wallpapers from wallhaven
-version="0.0.1"
+version="0.1.0"
 
 # Usage:
 # 	waldl <query>
@@ -56,6 +56,62 @@ menu_command="rofi -dmenu -l 0 -p 'search wallpapers'"
 
 # allow the user to customize the defaults
 [ -e "$HOME/.config/waldlrc" ] && . "$HOME/.config/waldlrc"
+
+while [ "$#" -gt 0 ]; do
+	case "$1" in
+		--walldir)
+			walldir="$2"
+			shift 2
+			;;
+		--chachdir)
+			cachedir="$2"
+			shift 2
+			;;
+		--sxiv-opts)
+			sxiv_otps="$2"
+			shift 2
+			;;
+		--sxiv-opts-w)
+			sxiv_otps_w="$2"
+			shift 2
+			;;
+		--max-pages)
+			max_pages="$2"
+			shift 2
+			;;
+		--sorting | -s)
+			sorting="$2"
+			shift 2
+			;;
+		--quality | -q)
+			quality="$2"
+			shift 2
+			;;
+		--atleast | -r)
+			atleast="$2"
+			shift 2
+			;;
+		--ratios | -t)
+			ratios="$2"
+			shift 2
+			;;
+		--categories | -g)
+			categories="$2"
+			shift 2
+			;;
+		--purity | -p)
+			purity="$2"
+			shift 2
+			;;
+		--colors | -c)
+			ratios="$2"
+			shift 2
+			;;
+		*)
+			break
+			;;
+	esac
+done
 
 sh_menu() {
 	eval "$menu_command"
