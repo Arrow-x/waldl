@@ -35,6 +35,8 @@ quality=large
 atleast=1920x1080
 # ratios; comma seperated aspect ratios
 ratios=16x9,16x10
+# general/anime/people
+categories=111
 # add your apikey
 apikey=""
 # wallpaper_command: specify the command that can set your wallpaper
@@ -114,7 +116,8 @@ get_results() {
 					-d "page=$page_no" \
 					-d "atleast=$atleast" \
 					-d "sorting=$sorting" \
-					-d "ratios=$ratios"
+					-d "ratios=$ratios" \
+					-d "categories=$categories"
 			)
 			printf "%s\n" "$json" >>"$datafile"
 		} &
