@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# https://github.com/pystardust/waldl
 # https://github.com/arrowx/waldl
 # script to find and download wallpapers from wallhaven
 version="0.1.0"
@@ -32,7 +33,7 @@ sorting=relevance
 # quality : large original small
 quality=large
 # atleast : least res
-atleast=1920x1080
+atleast=""
 # ratios; comma seperated aspect ratios
 ratios=16x9,16x10
 # general/anime/people
@@ -174,7 +175,7 @@ full_link="https://wallhaven.cc/api/v1/search"
 [ -n "$apikey" ] && full_link="$full_link""?apikey=""$apikey"
 # request the search results for each page
 get_results() {
-	for page_no in $(seq $max_pages); do
+	for page_no in $(seq "$max_pages"); do
 		{
 			json=$(
 				curl -s -G "$full_link" \
@@ -242,4 +243,4 @@ for ids in $image_ids; do
 done | curl -K -
 
 sh_info "wallpapers downloaded in:- '$walldir'"
-\ls -c | "$VIEWER" "$sxiv_otps_w" | set_wall
+find "$walldir" -type f -printf "%T+ %p\n" | sort -r | sed "s#.* /#/#" | "$VIEWER" "$sxiv_otps_w" | set_wall
