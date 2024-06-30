@@ -3,7 +3,7 @@
 # https://github.com/pystardust/waldl
 # https://github.com/arrowx/waldl
 # script to find and download wallpapers from wallhaven
-version="0.1.0"
+version="1.0.0"
 
 # Usage:
 # 	waldl <query>
@@ -217,7 +217,6 @@ for url in $thumbnails; do
 	printf "url = %s\n" "$url"
 	printf "output = %s\n" "$cachedir/${url##*/}"
 done | curl -Z -K -
-#sh_info "downloaded thumbnails..."
 
 ###########################
 ## user selection (sxiv) ##
@@ -240,7 +239,7 @@ for ids in $image_ids; do
 	url=$(jq -r '.data[]?|select( .id == "'$ids'" )|.path' <"$datafile")
 	printf "url = %s\n" "$url"
 	printf -- "-O\n"
-done | curl -K -
+done | curl --parallel --parallel-immediate -K -
 
 sh_info "wallpapers downloaded in:- '$walldir'"
 find "$walldir" -type f -printf "%T+ %p\n" | sort -r | sed "s#.* /#/#" | "$VIEWER" "$sxiv_otps_w" | set_wall
