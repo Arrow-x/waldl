@@ -58,6 +58,26 @@ menu_command="rofi -dmenu -l 0 -p 'search wallpapers'"
 # allow the user to customize the defaults
 [ -e "$HOME/.config/waldlrc" ] && . "$HOME/.config/waldlrc"
 
+help_cmd() {
+	echo "a script to search and download wallpaper form wallhaven"
+	echo "Usage:"
+	echo "waldl [options] [optionally pass the search prompt]"
+	echo "Options:"
+	echo "  -s    --sorting: defaults to relevance can be set to date_added, relevance, random, views, favorites, toplist"
+	echo "  -q    --quality: defaults to large can be set to large, original or small"
+	echo "  -r    --atleast: minimum resolution allowed"
+	echo "  -t    --ratios: wallpaper's aspect ration defaults to 16x9,16x10"
+	echo "  -g    --categories: three binaries to set up general/anime/people defaults to 111"
+	echo "  -p    --purity: three binaries to set up sfw/sketchy/nsfw defaults to 111"
+	echo "  -c    --colors: set the wanted colors hax code"
+	echo "        --walldir: to set the destination folder for the wallpaper"
+	echo "        --chachdir: to set the directory where the thumbnails are temporarily stored"
+	echo "        --sxiv-opts: to pass different arguments to sxiv when viewing thumbnails (advanced users only)"
+	echo "        --sxiv-opts-w: to pass different arguments to sxiv when viewing wallpapers (advanced users only)"
+	echo "        --max-pages: to set up a limit of how many pages the script searches"
+	echo "        --help: show this message and exit"
+}
+
 while [ "$#" -gt 0 ]; do
 	case "$1" in
 		--walldir)
@@ -107,6 +127,10 @@ while [ "$#" -gt 0 ]; do
 		--colors | -c)
 			ratios="$2"
 			shift 2
+			;;
+		--help | -h)
+			help_cmd
+			exit 0
 			;;
 		*)
 			break
